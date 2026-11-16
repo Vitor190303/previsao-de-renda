@@ -6,6 +6,10 @@ O projeto foi desenvolvido seguindo as etapas do **CRISP-DM**, passando pela com
 
 ---
 
+## 🚀 Aplicação online
+
+[🔗 Clique aqui para testar o projeto](https://previsao-renda-vitor.streamlit.app)
+
 ## 🎯 Objetivo do projeto
 
 O objetivo é utilizar informações como:
