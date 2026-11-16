@@ -53,7 +53,7 @@ arquivo_dados = (
 pasta_modelo = (
     pasta_app
     / "output"
-    / "modelo"
+    / "Modelo"
 )
 
 
