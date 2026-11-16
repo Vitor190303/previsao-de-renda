@@ -211,9 +211,7 @@ streamlit run app.py
 
 ## 📹 Demonstração
 
-Uma demonstração da aplicação Streamlit será adicionada abaixo.
-
-<!-- Aqui será inserido posteriormente o vídeo ou GIF do Streamlit -->
+![Demonstração do Streamlit](assets/streamlit.gif)
 
 ---
 
