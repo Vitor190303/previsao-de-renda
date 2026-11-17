@@ -1,0 +1,48 @@
+name: Validar modelo e Streamlit
+on:
+  push:
+    branches: [revisao-metodologia-streamlit-2026]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  validacao:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Dependências
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt pytest
+      - name: Testes de pipeline
+        run: python -m pytest -q tests/test_modelagem.py
+      - name: Validar CSV real e métricas
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import numpy as np
+          import pandas as pd
+          from modelagem import treinar_e_avaliar
+          arquivo = Path("input/previsao_de_renda.csv")
+          dados = pd.read_csv(arquivo)
+          modelo, metrics, diagnosticos = treinar_e_avaliar(dados)
+          print("Resultados do modelo revisado com a base real:")
+          for nome, valor in metrics.items():
+              print(f"{nome}: {valor}")
+          assert metrics["clientes_em_ambos"] == 0
+          assert len(diagnosticos) == metrics["registros_teste"]
+          assert np.isfinite(metrics["mae"]) and np.isfinite(metrics["rmse"]) and np.isfinite(metrics["r2"])
+          PY
+      - name: Testar aplicação Streamlit
+        run: |
+          python - <<'PY'
+          from streamlit.testing.v1 import AppTest
+          at = AppTest.from_file("app.py", default_timeout=240).run(timeout=240)
+          if at.exception:
+              raise AssertionError([str(e.message) for e in at.exception])
+          print("Streamlit iniciado sem exceções")
+          PY
