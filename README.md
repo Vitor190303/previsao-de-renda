@@ -23,7 +23,7 @@ Entradas: sexo, idade, tempo de emprego, tipo de renda, educação, estado civil
 
 ## Resultados exploratórios prévios
 
-Estes foram os resultados observados **em execuções manuais** antes da consolidação do pipeline atual. São valores de referência histórica, **não métricas finais verificadas da branch revisada**:
+Estes foram os resultados observados **em execuções manuais** antes da consolidação do pipeline atual. São valores de referência histórica, **não métricas calculadas automaticamente pela versão atual do pipeline**:
 
 | Experimento | MAE | RMSE | R² |
 |---|---:|---:|---:|
@@ -55,8 +55,10 @@ O aplicativo lê `input/previsao_de_renda.csv` e treina um único pipeline, usad
 
 - `modelagem.py`: funções de validação, treino, pré-processamento, previsão e importâncias.
 - `app.py`: interface Streamlit com métricas dinâmicas.
-- `projeto-2.ipynb`: notebook antigo, preservado como histórico (não é a metodologia em produção).
+- `notebook_revisado.ipynb`: notebook principal e reproduzível, integrado ao pipeline de `modelagem.py`.
 - `tests/test_modelagem.py`: testes de funcionamento com dados fictícios.
 - `input/previsao_de_renda.csv`: dataset usado na execução.
+
+O notebook anterior (`projeto-2.ipynb`) foi retirado da pasta principal. Seu desenvolvimento anterior pode ser consultado no histórico de versões (commits) do GitHub; a versão de referência para execução é `notebook_revisado.ipynb`.
 
 **Autor:** Vitor Campos — projeto de estudos de Ciência de Dados.
